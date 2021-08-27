@@ -15,5 +15,4 @@ add_executable(FluidScripten.js ${source_files})
 # emscripten specific
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2 ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s NO_FILESYSTEM=1 ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s NO_FILESYSTEM=1 ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s FILESYSTEM=0 ")
