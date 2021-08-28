@@ -70,7 +70,7 @@ int Dy=mouse_y-mouse_y_previous;
 float dr=sqrt(Dx*Dx+Dy*Dy)+0.001;
 float dx=Dx/(dr);
 float dy=Dy/(dr);
-static const int radius=1;
+static const int radius=10;
 for(int r=0;r<dr;r++)
 {
 int X=mouse_x_previous+r*dx;
