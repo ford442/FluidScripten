@@ -23,9 +23,9 @@ float dn=texture2D(intensity,fPos+vec2(0.0,0.01)).r;
 float d=texture2D(intensity,fPos).r;
 float dp=texture2D(intensity,fPos-vec2(0.0,0.01)).r;
 float D=0.7+2.0*(dp-dn);
-const vec4 startColor=vec4(0.0,0.0,0.1,1.0);
-const vec4 endColor=vec4(0.0,0.0,0.9,1.0);
-gl_FragColor=D*mix(startColor,endColor,d*6.0);
+const vec4 startColor=vec4(0.0,0.0,0.0,1.0);
+const vec4 endColor=vec4(0.0,0.0,1.0,1.0);
+gl_FragColor=D*mix(startColor,endColor,d*8.0);
 gl_FragColor.a=1.0;
 }
 )";
