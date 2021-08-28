@@ -19,11 +19,8 @@ cerr<<"SDL_Init failed!\n";
 cerr<<SDL_GetError()<<endl;
 throw 0;
 }
-width=EM_ASM(var
-w=Math.round(window.innerHeight);
-return w;
-);
-height=width;
+width=1080;
+height=1080;
 loadOpenGLContext();
 this->init();
 #ifdef EMSCRIPTEN
