@@ -1,76 +1,63 @@
 #include "Application.hpp"
 #include <iostream>
-
 #ifdef EMSCRIPTEN
 #include <emscripten/emscripten.h>
 #endif
-
 using namespace std;
-
-
-Application* application = nullptr;
+Application *application=nullptr;
 static void main_loop()
 {
-    application->step();
+application->step();
 }
-
-
 void Application::exec()
 {
-    application = this;
-    SDL_SetMainReady(); 
-    if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
-    {
-        cerr << "SDL_Init failed!\n";
-        cerr << SDL_GetError() << endl;
-        throw 0;
-    }
-    width = 512;
-    height = 512;
-    loadOpenGLContext();
-
-    this->init();
-#ifdef EMSCRIPTEN
-    emscripten_set_main_loop(main_loop, 0, true);
-#else
-    while (!done) {
-        em_arg_callback_func();
-    }
-#endif
-
-    SDL_Quit();
-
+application=this;
+SDL_SetMainReady();
+if(SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO|SDL_INIT_EVENTS)<0)
+{
+cerr<<"SDL_Init failed!\n";
+cerr<<SDL_GetError()<<endl;
+throw 0;
 }
-
+width=EM_ASM(var
+w=Math.round(window.innerHeight);
+return w;
+);
+height=width;
+loadOpenGLContext();
+this->init();
+#ifdef EMSCRIPTEN
+emscripten_set_main_loop(main_loop, 0, true);
+#else
+while(!done)
+{
+em_arg_callback_func();
+}
+#endif
+SDL_Quit();
+}
 void Application::loadOpenGLContext()
 {
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2); 
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0); 
-
-    window = SDL_CreateWindow("Fluid_Emscripten", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-
-    if (window == nullptr)
-    {
-        cerr << "Error when creating SDL GL Window: '" << SDL_GetError() << "'\n";
-    }
-
-    context = SDL_GL_CreateContext(window);
-    if (!context)
-    {
-        cerr << "Error when creating SDL GL Context: '" << (SDL_GetError()) <<"'\n";
-    }
-
-    SDL_GetWindowSize(window, &width, &height);
+SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);
+SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,2);
+SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION,0);
+window=SDL_CreateWindow("Fluid_Emscripten",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
+if(window==nullptr)
+{
+cerr<<"Error when creating SDL GL Window: '"<<SDL_GetError()<<"'\n";
 }
-
+context=SDL_GL_CreateContext(window);
+if(!context)
+{
+cerr<<"Error when creating SDL GL Context: '"<<(SDL_GetError())<<"'\n";
+}
+SDL_GetWindowSize(window,&width,&height);
+}
 void Application::step()
 {
-    static int step_counter = 0;
-    cout << "Step = " << step_counter++ << endl;
+static int step_counter=0;
+cout<<"Step = "<<step_counter++<<endl;
 }
-
 void Application::init()
 {
 }
