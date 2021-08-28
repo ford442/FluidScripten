@@ -6,12 +6,11 @@ attribute vec4 vPosition;
 varying vec2 fPos;
 void main()                 
 {
-    fPos = vPosition.xy;
-    float x = vPosition.x;
-    float y = vPosition.y;
-    gl_Position = vec4(2.0*x-1.0,2.0*y-1.0,0.0,1.0);
+fPos=vPosition.xy;
+float x=vPosition.x;
+float y=vPosition.y;
+gl_Position=vec4(2.0*x-1.0,2.0*y-1.0,0.0,1.0);
 }                           
-
 )";
 const string fragment=R"(
 precision mediump float;
@@ -23,8 +22,8 @@ float dn=texture2D(intensity,fPos+vec2(0.0,0.01)).r;
 float d=texture2D(intensity,fPos).r;
 float dp=texture2D(intensity,fPos-vec2(0.0,0.01)).r;
 float D=0.7+2.0*(dp-dn);
-const vec4 startColor=vec4(0.0,0.0,0.3,1.0);
-const vec4 endColor=vec4(0.0,0.0,1.0,0.8);
+const vec4 startColor=vec4(0.0,0.0,1.0,1.0);
+const vec4 endColor=vec4(0.0,0.0,0.4,0.8);
 gl_FragColor=D*mix(startColor,endColor,d*8.0);
 gl_FragColor.a=1.0;
 }
