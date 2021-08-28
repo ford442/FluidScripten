@@ -1,6 +1,5 @@
 #include "FluidApplication.hpp"
 #include <iostream>
-#include <SDL/SDL_mouse.h>
 using namespace std;
 const string vertex=R"(
 attribute vec4 vPosition;
