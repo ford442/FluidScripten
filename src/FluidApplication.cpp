@@ -19,11 +19,6 @@ varying vec2 fPos;
 uniform sampler2D intensity;
 void main()                                
 {                                          
-float d=texture2D(intensity,fPos).r;
-gl_FragColor=vec4(rainbow(d)*min(1.0,d*10.0),1.0);
-gl_FragColor=vec4(d,d,d,1.0);
-gl_FragColor=colormap(1.0-d);
-
 float dn=texture2D(intensity,fPos+vec2(0.0,0.01)).r;
 float d=texture2D(intensity,fPos).r;
 float dp=texture2D(intensity,fPos-vec2(0.0,0.01)).r;
