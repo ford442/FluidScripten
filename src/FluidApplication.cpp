@@ -25,13 +25,13 @@ float dp=texture2D(intensity,fPos-vec2(0.0,0.01)).r;
 float D=0.7+2.0*(dp-dn);
 const vec4 startColor=vec4(0.0,0.0,0.1,1.0);
 const vec4 endColor=vec4(0.0,0.0,0.9,1.0);
-gl_FragColor=D*mix(startColor,endColor,d*3.2);
+gl_FragColor=D*mix(startColor,endColor,d*6.0);
 gl_FragColor.a=1.0;
 }
 )";
 void FluidApplication::init()
 {
-intensity.resize(N*N,32);
+intensity.resize(N*N,128);
 program.reset(new ShaderProgram(vertex,fragment));
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -70,7 +70,7 @@ int Dy=mouse_y-mouse_y_previous;
 float dr=sqrt(Dx*Dx+Dy*Dy)+0.001;
 float dx=Dx/(dr);
 float dy=Dy/(dr);
-static const int radius=10;
+static const int radius=5;
 for(int r=0;r<dr;r++)
 {
 int X=mouse_x_previous+r*dx;
