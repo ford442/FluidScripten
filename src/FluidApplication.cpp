@@ -36,7 +36,7 @@ program.reset(new ShaderProgram(vertex,fragment));
 glGenBuffers(1,&vbo);
 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 GLfloat vVertices[]={
-0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,1.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,1.0f,0.0f,0.0f,1.0f,0.0f,
+0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,1.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,1.0f,0.0f,0.0f,1.0f,0.0f
 };
 glBufferData(GL_ARRAY_BUFFER,6*3*sizeof(GLfloat),&vVertices[0],GL_STATIC_DRAW);
 glBindBuffer(GL_ARRAY_BUFFER,0);
